@@ -1,4 +1,4 @@
-#cmd 命令操作mysql；
+#windows cmd 命令操作mysql；
 
 +-------------------------+
 | Tables_in_statistical   |
