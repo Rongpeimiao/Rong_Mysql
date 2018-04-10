@@ -35,34 +35,34 @@ mysql> use statistical;
 mysql> source d:\rong\1_area.sql
 
 #查询表与分页
-mysql> select * from bus_administration_area where 1=1  limit 20,20;
+mysql> select * from  表名    where 1=1  limit 20,20;
 
 #查看列属性
-mysql> show full columns from fnd_user; 
+mysql> show full columns from 表名; 
 
-#修改列属性数据类型；alter table 表名 modify 列名 新的数据类型
-mysql> alter table fnd_user modify create_date datetime;
+#修改列属性数据类型；alter table 表名 modify 列名  新的数据类型
+mysql> alter table 表名   modify create_date datetime;
 
 #修改表注释
-mysql> ALTER TABLE bus_branch  COMMENT='机构组织';
+mysql> ALTER TABLE tab  COMMENT='机构组织';
 
 #添加列
-mysql> alter table std_employee_info add column employee_Sex  varchar(100);
+mysql> alter table 表名   add column 列名    varchar(100);
 
 #修改列注释
 mysql> alter table bus_branch modify column code varchar(100)  comment '机构编码';
 
 #修改列名
-mysql> alter table  trn_contract_info  change  VEHICLE_FILE_NAME  CONTRACT_FILE_NAME  varchar(100);
+mysql> alter table  表名   change  列名    新列名  varchar(100);
 
 #查看表列
-mysql> show full columns  from fnd_user;
+mysql> show full columns  from 表名 ;
 
 #查看max_allowed_packet
 mysql> show VARIABLES like '%max_allowed_packet%';
 
 #删除表
-DROP TABLE  tbl_name;
+DROP TABLE  表名 ;
 
 #修改密码，以root用户登录，命令：mysql -uroot -pNF#6ajaffAdB 回车 输入密码；
 mysql> UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';
@@ -86,3 +86,5 @@ net start mysql
 #导出文件
 mysql -h127.0.0.1 -uroot -p123 -e "select * from user_tab " atisptDB> C:/Users/Administrator/Desktop/test.xls
 
+#导出txt文件,每行以  “>” 开头， 以@分割字段内容
+mysql>select * from tab where 1=1  into outfile "/var/lib/mysql-files/data_out20180409.txt"   FIELDS  TERMINATED BY '\@'  LINES   STARTING BY '\>' TERMINATED BY '\r\n';
