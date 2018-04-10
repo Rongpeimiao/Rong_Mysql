@@ -1,0 +1,106 @@
+#外网ip: 59.37.56.154
+#内网ip：10.100.36.179
+#cmd 命令操作mysql；
+
++-------------------------+
+| Tables_in_statistical   |
++-------------------------+
+| bus_administration_area |
+| bus_branch              |
+| bus_constan             |
+| bus_settlement          |
+| bus_waybill             |
+| bus_waybill_content     |
+| fnd_user                |
+| std_company_info        |
+| std_driver_base_info    |
+| std_route_info          |
+| std_station_info        |
+| std_vehicle_base_info   |
+| test_table              |
++-------------------------+
+
+202CB962AC59075B964B07152D234B70
+
+21232f297a57a5a743894a0e4a801fc3
+
+C:\Windows\system32>d:
+
+D:\>cd rong
+
+D:\rong>cd mysql
+
+D:\rong\mysql>cd bin
+
+#数据库连接 mysql -h 127.0.0.1 -uroot -p123  ;;;注册服务：mysqld -install MySQL --defaults-file="D:\rong\mysql\my-default.ini"
+D:\rong\mysql\bin>mysql -h 10.100.36.179 -uatis -patis710
+
+
+
+#查看数据库 
+mysql> show databases;
+
+#查看mysql端口号 netstat -aon|findstr "3306"
+mysql> show global variables like 'port'; 
+
+#创建数据库
+mysql>create database statistical;
+
+#使用数据库
+mysql> use statistical;
+
+#导入sql脚本
+mysql> source d:\rong\1_area.sql
+
+#查询表与分页
+mysql> select * from bus_administration_area where 1=1  limit 20,20;
+
+#查看列属性
+mysql> show full columns from fnd_user; 
+
+#修改列属性数据类型；alter table 表名 modify 列名 新的数据类型
+mysql> alter table fnd_user modify create_date datetime;
+
+#修改表注释
+mysql> ALTER TABLE bus_branch  COMMENT='机构组织';
+
+#添加列
+mysql> alter table std_employee_info add column employee_Sex  varchar(100);
+
+#修改列注释
+mysql> alter table bus_branch modify column code varchar(100)  comment '机构编码';
+
+#修改列名
+mysql> alter table  trn_contract_info  change  VEHICLE_FILE_NAME  CONTRACT_FILE_NAME  varchar(100);
+
+#查看表列
+mysql> show full columns  from fnd_user;
+
+#查看max_allowed_packet
+mysql> show VARIABLES like '%max_allowed_packet%';
+
+#删除表
+DROP TABLE  tbl_name;
+
+##以root用户登录，命令：mysql -uroot -pNF#6ajaffAdB 回车 输入密码；
+mysql> UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';
+#ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+mysql> alter user 'root'@'localhost' identified by 'root';
+#UPDATE mysql.user SET authentication_string=PASSWORD('qy2016') WHERE user='qy';
+mysql>use mysql；
+mysql>UPDATE mysql.user SET authentication_string=PASSWORD('atis710') WHERE user='atis';
+mysql>FLUSH PRIVILEGES;
+
+#删除数据库
+DROP DATABASE IF EXISTS 名称
+
+#重启mysql，先停止后启动
+net stop mysql
+net start mysql
+
+
+#mysqldump -uroot -proot statistical> e:\statistical.sql 
+
+#导出文件
+mysql -h127.0.0.1 -uroot -p123 -e "select * from user_tab " atisptDB> C:/Users/Administrator/Desktop/test.xls
+
