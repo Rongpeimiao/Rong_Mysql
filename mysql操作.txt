@@ -1,28 +1,10 @@
-#ÍâÍøip: 59.37.56.154
-#ÄÚÍøip£º10.100.36.179
-#cmd ÃüÁî²Ù×÷mysql£»
+#cmd å‘½ä»¤æ“ä½œmysqlï¼›
 
 +-------------------------+
 | Tables_in_statistical   |
 +-------------------------+
-| bus_administration_area |
-| bus_branch              |
-| bus_constan             |
-| bus_settlement          |
-| bus_waybill             |
-| bus_waybill_content     |
-| fnd_user                |
-| std_company_info        |
-| std_driver_base_info    |
-| std_route_info          |
-| std_station_info        |
-| std_vehicle_base_info   |
 | test_table              |
 +-------------------------+
-
-202CB962AC59075B964B07152D234B70
-
-21232f297a57a5a743894a0e4a801fc3
 
 C:\Windows\system32>d:
 
@@ -32,75 +14,75 @@ D:\rong>cd mysql
 
 D:\rong\mysql>cd bin
 
-#Êý¾Ý¿âÁ¬½Ó mysql -h 127.0.0.1 -uroot -p123  ;;;×¢²á·þÎñ£ºmysqld -install MySQL --defaults-file="D:\rong\mysql\my-default.ini"
+#æ•°æ®åº“è¿žæŽ¥ mysql -h 127.0.0.1 -uroot -p123  ;;;æ³¨å†ŒæœåŠ¡ï¼šmysqld -install MySQL --defaults-file="D:\rong\mysql\my-default.ini"
 D:\rong\mysql\bin>mysql -h 10.100.36.179 -uatis -patis710
 
 
 
-#²é¿´Êý¾Ý¿â 
+#æŸ¥çœ‹æ•°æ®åº“ 
 mysql> show databases;
 
-#²é¿´mysql¶Ë¿ÚºÅ netstat -aon|findstr "3306"
+#æŸ¥çœ‹mysqlç«¯å£å· netstat -aon|findstr "3306"
 mysql> show global variables like 'port'; 
 
-#´´½¨Êý¾Ý¿â
+#åˆ›å»ºæ•°æ®åº“
 mysql>create database statistical;
 
-#Ê¹ÓÃÊý¾Ý¿â
+#ä½¿ç”¨æ•°æ®åº“
 mysql> use statistical;
 
-#µ¼Èësql½Å±¾
+#å¯¼å…¥sqlè„šæœ¬
 mysql> source d:\rong\1_area.sql
 
-#²éÑ¯±íÓë·ÖÒ³
+#æŸ¥è¯¢è¡¨ä¸Žåˆ†é¡µ
 mysql> select * from bus_administration_area where 1=1  limit 20,20;
 
-#²é¿´ÁÐÊôÐÔ
+#æŸ¥çœ‹åˆ—å±žæ€§
 mysql> show full columns from fnd_user; 
 
-#ÐÞ¸ÄÁÐÊôÐÔÊý¾ÝÀàÐÍ£»alter table ±íÃû modify ÁÐÃû ÐÂµÄÊý¾ÝÀàÐÍ
+#ä¿®æ”¹åˆ—å±žæ€§æ•°æ®ç±»åž‹ï¼›alter table è¡¨å modify åˆ—å æ–°çš„æ•°æ®ç±»åž‹
 mysql> alter table fnd_user modify create_date datetime;
 
-#ÐÞ¸Ä±í×¢ÊÍ
-mysql> ALTER TABLE bus_branch  COMMENT='»ú¹¹×éÖ¯';
+#ä¿®æ”¹è¡¨æ³¨é‡Š
+mysql> ALTER TABLE bus_branch  COMMENT='æœºæž„ç»„ç»‡';
 
-#Ìí¼ÓÁÐ
+#æ·»åŠ åˆ—
 mysql> alter table std_employee_info add column employee_Sex  varchar(100);
 
-#ÐÞ¸ÄÁÐ×¢ÊÍ
-mysql> alter table bus_branch modify column code varchar(100)  comment '»ú¹¹±àÂë';
+#ä¿®æ”¹åˆ—æ³¨é‡Š
+mysql> alter table bus_branch modify column code varchar(100)  comment 'æœºæž„ç¼–ç ';
 
-#ÐÞ¸ÄÁÐÃû
+#ä¿®æ”¹åˆ—å
 mysql> alter table  trn_contract_info  change  VEHICLE_FILE_NAME  CONTRACT_FILE_NAME  varchar(100);
 
-#²é¿´±íÁÐ
+#æŸ¥çœ‹è¡¨åˆ—
 mysql> show full columns  from fnd_user;
 
-#²é¿´max_allowed_packet
+#æŸ¥çœ‹max_allowed_packet
 mysql> show VARIABLES like '%max_allowed_packet%';
 
-#É¾³ý±í
+#åˆ é™¤è¡¨
 DROP TABLE  tbl_name;
 
-##ÒÔrootÓÃ»§µÇÂ¼£¬ÃüÁî£ºmysql -uroot -pNF#6ajaffAdB »Ø³µ ÊäÈëÃÜÂë£»
+#ä¿®æ”¹å¯†ç ï¼Œä»¥rootç”¨æˆ·ç™»å½•ï¼Œå‘½ä»¤ï¼šmysql -uroot -pNF#6ajaffAdB å›žè½¦ è¾“å…¥å¯†ç ï¼›
 mysql> UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';
 #ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
 mysql> alter user 'root'@'localhost' identified by 'root';
 #UPDATE mysql.user SET authentication_string=PASSWORD('qy2016') WHERE user='qy';
-mysql>use mysql£»
+mysql>use mysqlï¼›
 mysql>UPDATE mysql.user SET authentication_string=PASSWORD('atis710') WHERE user='atis';
 mysql>FLUSH PRIVILEGES;
 
-#É¾³ýÊý¾Ý¿â
-DROP DATABASE IF EXISTS Ãû³Æ
+#åˆ é™¤æ•°æ®åº“
+DROP DATABASE IF EXISTS åç§°
 
-#ÖØÆômysql£¬ÏÈÍ£Ö¹ºóÆô¶¯
+#é‡å¯mysqlï¼Œå…ˆåœæ­¢åŽå¯åŠ¨
 net stop mysql
 net start mysql
 
 
 #mysqldump -uroot -proot statistical> e:\statistical.sql 
 
-#µ¼³öÎÄ¼þ
+#å¯¼å‡ºæ–‡ä»¶
 mysql -h127.0.0.1 -uroot -p123 -e "select * from user_tab " atisptDB> C:/Users/Administrator/Desktop/test.xls
 
