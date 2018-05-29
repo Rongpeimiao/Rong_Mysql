@@ -64,22 +64,9 @@ mysql> show VARIABLES like '%max_allowed_packet%';
 #删除表
 DROP TABLE  表名 ;
 
-#修改密码，以root用户登录，命令：mysql -uroot -pNF#6ajaffAdB 回车 输入密码；
-mysql> UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';
-#ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
-mysql> alter user 'root'@'localhost' identified by 'root';
-#UPDATE mysql.user SET authentication_string=PASSWORD('qy2016') WHERE user='qy';
-mysql>use mysql；
-mysql>UPDATE mysql.user SET authentication_string=PASSWORD('atis710') WHERE user='atis';
-mysql>FLUSH PRIVILEGES;
 
 #删除数据库
 DROP DATABASE IF EXISTS 名称
-
-#重启mysql，先停止后启动
-net stop mysql
-net start mysql
-
 
 #mysqldump -uroot -proot statistical> e:\statistical.sql 
 
@@ -88,3 +75,23 @@ mysql -h127.0.0.1 -uroot -p123 -e "select * from user_tab " atisptDB> C:/Users/A
 
 #导出txt文件,每行以  “>” 开头， 以@分割字段内容
 mysql>select * from tab where 1=1  into outfile "/var/lib/mysql-files/data_out20180409.txt"   FIELDS  TERMINATED BY '\@'  LINES   STARTING BY '\>' TERMINATED BY '\r\n';
+
+
+#msql数据库的安装，解压压缩包，cmd进入bin目录，配置ini文件的mysql和mysql中的data目录
+mysqld install
+
+#重启mysql，先停止后启动
+net stop mysql
+net start mysql
+
+#如果无法启动删除mysql安装主目录下的data目录下所有文件
+#mysqld --initialize 
+mysqld --initialize-insecure 
+
+##以root用户登录，命令：mysql -uroot -pNF#6ajaffAdB 回车 输入密码；
+mysql> UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';
+#ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+mysql> alter user 'root'@'localhost' identified by 'root';
+#UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';  修改密码
+mysql>UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root'; 
+mysql>FLUSH PRIVILEGES;
