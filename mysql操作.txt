@@ -95,3 +95,10 @@ mysql> alter user 'root'@'localhost' identified by 'root';
 #UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root';  修改密码
 mysql>UPDATE mysql.user SET authentication_string=PASSWORD('123') WHERE user='root'; 
 mysql>FLUSH PRIVILEGES;
+
+
+#允许远程访问的用户，1、选择mysql数据库：
+use mysql;
+#允许远程访问的用户，2、允许远程访问的用户或者允许现有用户的远程访问。给root授予在任意主机（%）访问任意数据库的所有权限。重启mysql，先停止后启动
+update user set host='%' where user='root' and host='localhost';
+
